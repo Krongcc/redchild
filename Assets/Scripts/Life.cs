@@ -15,6 +15,9 @@ public class Life : MonoBehaviour
              
              AudioManager.obj.playCoin();
              
+             UIManager.obj.updateScore();
+             UIManager.obj.updateLives();
+             
              FXManager.obj.showPop(transform.position);
              gameObject.SetActive(false);
         }
