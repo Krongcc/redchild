@@ -12,6 +12,7 @@ public class Coin : MonoBehaviour
         {
             Game.obj.addScore(scoreGive);
             
+            FXManager.obj.showPop(transform.position);            
             gameObject.SetActive(false);
         }
     }

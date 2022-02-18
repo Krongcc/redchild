@@ -13,6 +13,7 @@ public class Life : MonoBehaviour
              Game.obj.addScore(scoreGive);
              Player.obj.addLive();
              
+             FXManager.obj.showPop(transform.position);
              gameObject.SetActive(false);
         }
     }
