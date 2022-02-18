@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             //Destruir enemigo
+            AudioManager.obj.playEnemyHit();
             getKilled();
             
         }

@@ -53,11 +53,23 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             jump();
         
+        if (isImmune)
+        {
+            spr.enabled = !spr.enabled;
+            
+            immuneTimeCnt -= Time.deltaTime;
+            
+            if (immuneTimeCnt <= 0)
+            {
+                isImmune = false;
+                spr.enabled = true;
+            }
+        }
+        
         anim.SetBool("isMoving", isMoving);
         anim.SetBool("isGrounded", isGrounded);
         
-        flip(movHor);
-        
+        flip(movHor);        
     }
         
     void FixedUpdate()
@@ -65,11 +77,18 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(movHor * speed, rb.velocity.y);
     }
     
+    private void goImmune()
+    {
+        isImmune = true;
+        immuneTimeCnt = immuneTime;
+    }
+    
     public void jump()
     {
         if (!isGrounded) return;
         
         rb.velocity = Vector2.up * jumpForce;
+        AudioManager.obj.playJump();
     }
     
     private void flip(float _xValue)
@@ -88,6 +107,9 @@ public class Player : MonoBehaviour
     public void getDamage()
     {
         lives--;
+        AudioManager.obj.playHit();
+        
+        goImmune();
         
         if (lives <= 0)
         {
